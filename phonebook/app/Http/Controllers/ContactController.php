@@ -10,9 +10,8 @@ class ContactController extends Controller
 {
     public function get_all_contact()
     {
-        $contacts = Contact::all();
-        return response()->json([
-            'contacts' => $contacts
-        ], 200);
+        $contacts = Contact::with('emails', 'PhoneNumbers')->get();
+
+        return response()->json(['contacts' => $contacts]);
     }
 }
